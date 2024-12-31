@@ -1,0 +1,40 @@
+<!-- rsvp/templates/rsvp/rsvp.html -->
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy New Year</title>
+    <link rel="stylesheet" href="{% static 'rsvp/styles.css' %}">
+</head>
+<body>
+    <div class="container">
+        <div class="clock" id="clock">Come Toady At 7:00 at gym</div>
+        <div class="banner" id="banner">Lets do Today Party after Gym!</div>
+        <canvas id="fireworksCanvas"></canvas>
+        <h1>Are you coming to the party?</h1>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Submit</button>
+        </form>
+        {% if message %}
+            <p>{{ message }}</p>
+        {% endif %}
+        <h2>People who said "Yes": {{ yes_count }}</h2>
+        <ul>
+            {% for name in yes_names %}
+                <li>{{ name }}</li>
+            {% endfor %}
+        </ul>
+        <h2>People who said "No": {{ no_count }}</h2>
+        <ul>
+            {% for name in no_names %}
+                <li>{{ name }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    <script src="{% static 'rsvp/script.js' %}"></script>
+</body>
+</html>
